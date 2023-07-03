@@ -69,7 +69,7 @@ vector_t *vector_new() {
        Since retval->data should be able to dynamically grow,
        what do you need to do? */
     retval->size = 1;
-    retval->data = malloc(sizeof(int));
+    retval->data = calloc(retval->size, sizeof(int));
 
     /* Check the data attribute of our vector to make sure we got memory */
     if (retval->data == NULL) {
@@ -78,7 +78,7 @@ vector_t *vector_new() {
     }
 
     /* Complete the initialization by setting the single component to zero */
-    *(retval->data) = 0;
+    //*(retval->data) = 0; not necessary because calloc already set it to 0
 
     /* and return... */
     return retval;
@@ -120,25 +120,27 @@ void vector_set(vector_t *v, size_t loc, int value) {
     /* YOUR SOLUTION HERE */
 
     if (loc > v->size) {
-        int *new_data = malloc(sizeof(int) * (loc + 1));
+        // int *new_data = malloc(sizeof(int) * (loc + 1));
 
-        int i;
+        // int i;
 
-        for(i = 0; i < v->size; i++) {
-            new_data[i] = v->data[i];
-        }
+        // for(i = 0; i < v->size; i++) {
+        //     new_data[i] = v->data[i];
+        // }
 
-        for(i = v->size; i < loc; i++) {
-            new_data[i] = 0;
-        }
+        // for(i = v->size; i < loc; i++) {
+        //     new_data[i] = 0;
+        // }
 
-        new_data[loc] = value;
+        // new_data[loc] = value;
+        // v->size = loc + 1;
+
+        // free(v->data);
+        // v->data = new_data;
+
+        realloc(v->data, sizeof(int) * (loc + 1));
         v->size = loc + 1;
-
-        free(v->data);
-        v->data = new_data;
     }
-    else {
-        v->data[loc] = value;
-    }
+        
+    v->data[loc] = value;
 }
