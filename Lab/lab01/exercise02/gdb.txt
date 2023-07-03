@@ -1,0 +1,9 @@
+1. set args [ARG1] [ARG2] [ARG3] ...
+2. break(b) main, break linenum
+3. next(n) or step(s)
+4. nexti(ni) or stepi(si)
+5. continue(c)
+6. print(p) [VARIABLE_NAME]
+7. display [VARIABLE_NAME]
+8. (info locals) or (bt full)
+9. quit, exit
